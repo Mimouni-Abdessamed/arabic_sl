@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true"
+    android:interpolator="@android:anim/bounce_interpolator">
+
+    <!-- Animation de zoom avec effet rebond -->
+    <scale
+        android:duration="800"
+        android:fromXScale="0.7"
+        android:toXScale="1.1"
+        android:fromYScale="0.7"
+        android:toYScale="1.1"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="100"
+        android:repeatMode="reverse"
+        android:repeatCount="1"/>
+
+    <!-- Légère rotation pour dynamisme -->
+    <rotate
+        android:duration="1000"
+        android:fromDegrees="-10"
+        android:toDegrees="0"
+        android:pivotX="50%"
+        android:pivotY="50%"/>
+
+    <!-- Apparition progressive -->
+    <alpha
+        android:duration="600"
+        android:fromAlpha="0.3"
+        android:toAlpha="1.0"/>
+
+    <!-- Effet de pulsation après l'animation principale -->
+    <scale
+        android:startOffset="1000"
+        android:duration="500"
+        android:fromXScale="1.0"
+        android:toXScale="1.05"
+        android:fromYScale="1.0"
+        android:toYScale="1.05"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"/>
+</set>

@@ -1,9 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainFragment">
+    android:background="#1E1E1E"
+    android:layoutDirection="ltr">
+
+    <Space
+        android:id="@+id/topSpacer"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/lettersButton"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="حروف"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:backgroundTint="#2A2D32"
+        app:cornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/topSpacer"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/numbersButton"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="ارقام"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:backgroundTint="#2A2D32"
+        app:cornerRadius="16dp"
+        app:layout_constraintTop_toTopOf="@id/lettersButton"
+        app:layout_constraintEnd_toStartOf="@id/lettersButton"
+        android:layout_marginEnd="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/challengesButton"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="تحديات"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:backgroundTint="#2A2D32"
+        app:cornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/lettersButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>   -->
 
 
-</FrameLayout>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:background="#1E1E1E"
+    android:layoutDirection="ltr"
+    android:padding="20dp">
+
+    <!-- Espace supérieur original -->
+    <Space
+        android:id="@+id/topSpacer"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Titre de la section -->
+    <TextView
+        android:id="@+id/train_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_trainFr"
+        android:textSize="22sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/topSpacer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Carte Lettres - Style cohérent avec HomeFragment -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_letters"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="#2D2D2D"
+        app:layout_constraintTop_toBottomOf="@id/train_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_letters"
+                app:tint="#2196F3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lettreTxt"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="6dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sub_lettre"
+                android:textSize="11sp"
+                android:textColor="#B0B0B0"/>
+
+            <!-- Le bouton invisible qui maintient la même fonctionnalité -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/lettersButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="-100dp"
+                app:backgroundTint="@android:color/transparent"
+                android:contentDescription="تدريب الحروف"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Carte Nombres - Style cohérent avec HomeFragment -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_numbers"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="#2D2D2D"
+        app:layout_constraintTop_toBottomOf="@id/card_letters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_numbers"
+                app:tint="#FF9800" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numbers_txt"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="6dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تعلم إشارات الأرقام من ٠ إلى ٩"
+                android:textSize="11sp"
+                android:textColor="#B0B0B0"/>
+
+            <!-- Le bouton invisible qui maintient la même fonctionnalité -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/numbersButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="-100dp"
+                app:backgroundTint="@android:color/transparent"
+                android:contentDescription="تدريب الأرقام"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Carte Challenges - Style cohérent avec HomeFragment -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_challenges"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="#2D2D2D"
+        app:layout_constraintTop_toBottomOf="@id/card_numbers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_challenges"
+                app:tint="#9C27B0" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chaleng_txt"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="6dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اختبر مهاراتك مع تحديات لغة الإشارة"
+                android:textSize="11sp"
+                android:textColor="#B0B0B0"/>
+
+            <!-- Le bouton invisible qui maintient la même fonctionnalité -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/challengesButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="-100dp"
+                app:backgroundTint="@android:color/transparent"
+                android:contentDescription="تدريب التحديات"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

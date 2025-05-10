@@ -29,4 +29,8 @@
     <color name="icFocused">#DDFFFFFF</color>
     <color name="icPressed">#AAFFFFFF</color>
     <item name="background" type="color">#1C1C1C</item>
+
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryLight">#BB86FC</color>
 </resources>
