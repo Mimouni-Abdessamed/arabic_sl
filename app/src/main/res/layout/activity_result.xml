@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@android:color/black">
+
+
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تقييمك هو : 0 / 0"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="40dp"/>
+
+    <Button
+        android:id="@+id/retryButton"
+        android:layout_width="232dp"
+        android:layout_height="75dp"
+        android:backgroundTint="#9C3BC5"
+        android:text="إعادة اللعب "
+        android:textSize="40sp"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="56dp"
+    android:background="#000000"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="#000000"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="55dp"
+            android:text="أي اشارة هذه؟"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textAlignment="center" />
+
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="336dp"
+            android:layout_height="254dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="80dp"
+            android:minHeight="254dp"
+            />
+
+        <!-- Options Container - Modifié pour mieux gérer le redimensionnement -->
+        <LinearLayout
+            android:id="@+id/optionsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:minHeight="100dp">
+
+            <!-- Option 1 - Ajouté des transitions pour un effet fluide -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardOption1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:transitionName="option1"
+                app:cardBackgroundColor="#3A3838"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/option1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/optionImage1"
+                        android:layout_width="65dp"
+                        android:layout_height="85dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:id="@+id/optionText1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Option 2 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardOption2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#3A3838"
+                android:clickable="true"
+                android:transitionName="option2"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:id="@+id/optionImage2"
+                        android:layout_width="65dp"
+                        android:layout_height="85dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:id="@+id/optionText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Option 3 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardOption3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                app:cardBackgroundColor="#3A3838"
+                android:transitionName="option3"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:id="@+id/option3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/optionImage3"
+                        android:layout_width="65dp"
+                        android:layout_height="85dp"
+                        android:layout_marginBottom="8dp"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:id="@+id/optionText3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Hint Button - Style amélioré -->
+        <Button
+            android:id="@+id/hintButton"
+            android:layout_width="171dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="#9C3BC5"
+            android:elevation="4dp"
+            android:text="Hint"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </LinearLayout>
+</ScrollView>

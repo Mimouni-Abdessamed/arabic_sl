@@ -70,24 +70,7 @@ class CameraFragment : Fragment(),
     /** Blocking ML operations are performed using this executor */
     private lateinit var backgroundExecutor: ExecutorService
 
-    override fun onResume() {
-        super.onResume()
-        // Make sure that all permissions are still present, since the
-        // user could have removed them while the app was in paused state.
-        if (!PermissionsFragment.hasPermissions(requireContext())) {
-            Navigation.findNavController(
-                requireActivity(), R.id.fragment_container
-            ).navigate(R.id.action_camera_to_permissions)
-        }
 
-        // Start the GestureRecognizerHelper again when users come back
-        // to the foreground.
-        backgroundExecutor.execute {
-            if (gestureRecognizerHelper.isClosed()) {
-                gestureRecognizerHelper.setupGestureRecognizer()
-            }
-        }
-    }
 
     override fun onPause() {
         super.onPause()
@@ -155,128 +138,12 @@ class CameraFragment : Fragment(),
             )
         }
 
-        // Attach listeners to UI control widgets
-        initBottomSheetControls()
+
     }
 
-    private fun initBottomSheetControls() {
-        // init bottom sheet settings
-        fragmentCameraBinding.bottomSheetLayout.detectionThresholdValue.text =
-            String.format(
-                Locale.US, "%.2f", viewModel.currentMinHandDetectionConfidence
-            )
-        fragmentCameraBinding.bottomSheetLayout.trackingThresholdValue.text =
-            String.format(
-                Locale.US, "%.2f", viewModel.currentMinHandTrackingConfidence
-            )
-        fragmentCameraBinding.bottomSheetLayout.presenceThresholdValue.text =
-            String.format(
-                Locale.US, "%.2f", viewModel.currentMinHandPresenceConfidence
-            )
 
-        // When clicked, lower hand detection score threshold floor
-        fragmentCameraBinding.bottomSheetLayout.detectionThresholdMinus.setOnClickListener {
-            if (gestureRecognizerHelper.minHandDetectionConfidence >= 0.2) {
-                gestureRecognizerHelper.minHandDetectionConfidence -= 0.1f
-                updateControlsUi()
-            }
-        }
 
-        // When clicked, raise hand detection score threshold floor
-        fragmentCameraBinding.bottomSheetLayout.detectionThresholdPlus.setOnClickListener {
-            if (gestureRecognizerHelper.minHandDetectionConfidence <= 0.8) {
-                gestureRecognizerHelper.minHandDetectionConfidence += 0.1f
-                updateControlsUi()
-            }
-        }
 
-        // When clicked, lower hand tracking score threshold floor
-        fragmentCameraBinding.bottomSheetLayout.trackingThresholdMinus.setOnClickListener {
-            if (gestureRecognizerHelper.minHandTrackingConfidence >= 0.2) {
-                gestureRecognizerHelper.minHandTrackingConfidence -= 0.1f
-                updateControlsUi()
-            }
-        }
-
-        // When clicked, raise hand tracking score threshold floor
-        fragmentCameraBinding.bottomSheetLayout.trackingThresholdPlus.setOnClickListener {
-            if (gestureRecognizerHelper.minHandTrackingConfidence <= 0.8) {
-                gestureRecognizerHelper.minHandTrackingConfidence += 0.1f
-                updateControlsUi()
-            }
-        }
-
-        // When clicked, lower hand presence score threshold floor
-        fragmentCameraBinding.bottomSheetLayout.presenceThresholdMinus.setOnClickListener {
-            if (gestureRecognizerHelper.minHandPresenceConfidence >= 0.2) {
-                gestureRecognizerHelper.minHandPresenceConfidence -= 0.1f
-                updateControlsUi()
-            }
-        }
-
-        // When clicked, raise hand presence score threshold floor
-        fragmentCameraBinding.bottomSheetLayout.presenceThresholdPlus.setOnClickListener {
-            if (gestureRecognizerHelper.minHandPresenceConfidence <= 0.8) {
-                gestureRecognizerHelper.minHandPresenceConfidence += 0.1f
-                updateControlsUi()
-            }
-        }
-
-        // When clicked, change the underlying hardware used for inference.
-        // Current options are CPU and GPU
-        fragmentCameraBinding.bottomSheetLayout.spinnerDelegate.setSelection(
-            viewModel.currentDelegate, false
-        )
-        fragmentCameraBinding.bottomSheetLayout.spinnerDelegate.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long
-                ) {
-                    try {
-                        gestureRecognizerHelper.currentDelegate = p2
-                        updateControlsUi()
-                    } catch(e: UninitializedPropertyAccessException) {
-                        Log.e(TAG, "GestureRecognizerHelper has not been initialized yet.")
-
-                    }
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    /* no op */
-                }
-            }
-    }
-
-    // Update the values displayed in the bottom sheet. Reset recognition
-    // helper.
-    private fun updateControlsUi() {
-        fragmentCameraBinding.bottomSheetLayout.detectionThresholdValue.text =
-            String.format(
-                Locale.US,
-                "%.2f",
-                gestureRecognizerHelper.minHandDetectionConfidence
-            )
-        fragmentCameraBinding.bottomSheetLayout.trackingThresholdValue.text =
-            String.format(
-                Locale.US,
-                "%.2f",
-                gestureRecognizerHelper.minHandTrackingConfidence
-            )
-        fragmentCameraBinding.bottomSheetLayout.presenceThresholdValue.text =
-            String.format(
-                Locale.US,
-                "%.2f",
-                gestureRecognizerHelper.minHandPresenceConfidence
-            )
-
-        // Needs to be cleared instead of reinitialized because the GPU
-        // delegate needs to be initialized on the thread using it when applicable
-        backgroundExecutor.execute {
-            gestureRecognizerHelper.clearGestureRecognizer()
-            gestureRecognizerHelper.setupGestureRecognizer()
-        }
-        fragmentCameraBinding.overlay.clear()
-    }
 
     // Initialize CameraX, and prepare to bind the camera use cases
     private fun setUpCamera() {
@@ -371,8 +238,6 @@ class CameraFragment : Fragment(),
                     gestureRecognizerResultAdapter.updateResults(emptyList())
                 }
 
-                fragmentCameraBinding.bottomSheetLayout.inferenceTimeVal.text =
-                    String.format("%d ms", resultBundle.inferenceTime)
 
                 // Pass necessary information to OverlayView for drawing on the canvas
                 fragmentCameraBinding.overlay.setResults(
@@ -393,11 +258,7 @@ class CameraFragment : Fragment(),
             Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
             gestureRecognizerResultAdapter.updateResults(emptyList())
 
-            if (errorCode == GestureRecognizerHelper.GPU_ERROR) {
-                fragmentCameraBinding.bottomSheetLayout.spinnerDelegate.setSelection(
-                    GestureRecognizerHelper.DELEGATE_CPU, false
-                )
-            }
+
         }
     }
 }

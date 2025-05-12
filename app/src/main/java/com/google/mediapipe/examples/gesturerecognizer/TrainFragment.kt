@@ -1,60 +1,82 @@
 package com.google.mediapipe.examples.gesturerecognizer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-//import com.google.mediapipe.examples.gesturerecognizer.R
+import android.view.animation.AnimationUtils
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
+import com.google.mediapipe.examples.gesturerecognizer.fragment.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TrainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TrainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_train, container, false)
+        val view = inflater.inflate(R.layout.fragment_train, container, false)
+
+        val lettersButton = view.findViewById<MaterialButton>(R.id.lettersButton)
+        val numbersButton = view.findViewById<MaterialButton>(R.id.numbersButton)
+        val challengesButton = view.findViewById<MaterialButton>(R.id.challengesButton)
+        val wordsButton = view.findViewById<MaterialButton>(R.id.wordsButton)
+        val quizButton = view.findViewById<MaterialButton>(R.id.quizButton)
+
+        lettersButton.setOnClickListener {
+            replaceFragment(LetterCameraFragment())
+        }
+
+        numbersButton.setOnClickListener {
+            replaceFragment(NumberCameraFragment())
+        }
+
+        challengesButton.setOnClickListener {
+            replaceFragment(ChallengesCameraFragment())
+        }
+
+        wordsButton.setOnClickListener {
+            // TODO: Replace with your actual fragment
+            replaceFragment(LetterCameraFragment())
+        }
+
+        quizButton.setOnClickListener {
+            // TODO: Replace with your actual fragment
+            replaceFragment(QuizFragment())
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TrainFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TrainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val fadeIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in)
+
+        val cardLetters = view.findViewById<CardView>(R.id.card_letters)
+        val cardNumbers = view.findViewById<CardView>(R.id.card_numbers)
+        val cardChallenges = view.findViewById<CardView>(R.id.card_challenges)
+        val cardWords = view.findViewById<CardView>(R.id.card_words)
+        val cardQuiz = view.findViewById<CardView>(R.id.card_quiz)
+
+        cardLetters.startAnimation(fadeIn)
+        cardNumbers.postDelayed({ cardNumbers.startAnimation(fadeIn) }, 150)
+        cardChallenges.postDelayed({ cardChallenges.startAnimation(fadeIn) }, 300)
+        cardWords.postDelayed({ cardWords.startAnimation(fadeIn) }, 450)
+        cardQuiz.postDelayed({ cardQuiz.startAnimation(fadeIn) }, 600)
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                android.R.anim.fade_in,
+                android.R.anim.fade_out,
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
+            )
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
