@@ -15,9 +15,21 @@
     ~ limitations under the License.
 -->
 <resources>
-    <string name="app_name">MP Gesture Recognizer</string>
+
+    <string name="app_logo_desc">Logo de l\'application</string>
+    <string name="app_name">تطبيق ترجمة لغة الإشارة</string>
+    <string name="translate_title">الترجمة</string>
+    <string name="translate_subtitle">ترجمة لغة الإشارة إلى العربية</string>
+    <string name="train_title">التدريب</string>
+    <string name="train_subtitle">تدرب على فهم لغة الإشارة</string>
+    <string name="dictionary_title">القاموس</string>
+    <string name="dictionary_subtitle">ابحث عن معاني الإشارات</string>
+
 
     <string name="media_pipe">MediaPipe</string>
+
+    <string name="skip">Skip</string>
+
 
     <string name="alt_bottom_sheet_chevron">Bottom sheet expandable indicator</string>
 
@@ -49,6 +61,19 @@
     <string name="dictionary">القاموس\n</string>
     <string name="translate">الترجمة</string>
     <string name="train">التدرب</string>
+    <string name="text_trainFr">تدريب لغة الإشارة</string>
+    <string name="lettreTxt">حروف</string>
+    <string name="sub_lettre">تعلم إشارات الحروف الأبجدية</string>
+    <string name="numbers_txt">ارقام</string>
+    <string name="chaleng_txt">تحديات</string>
+
+    <!-- Words Section -->
+    <string name="words_txt">كلمات</string>
+    <string name="sub_words">تعلم إشارات الكلمات الشائعة</string>
+
+    <!-- Quiz Section -->
+    <string name="quiz_txt">اختبارات</string>
+    <string name="sub_quiz">اختبر معرفتك بلغة الإشارة</string>
 
     <string-array name="delegate_spinner_titles">
         <item>CPU</item>

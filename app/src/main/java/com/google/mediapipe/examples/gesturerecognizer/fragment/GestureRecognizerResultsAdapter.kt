@@ -1,18 +1,3 @@
-/*
- * Copyright 2022 The TensorFlow Authors. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *             http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.google.mediapipe.examples.gesturerecognizer.fragment
 
 import android.annotation.SuppressLint
@@ -26,6 +11,7 @@ import kotlin.math.min
 
 class GestureRecognizerResultsAdapter :
     RecyclerView.Adapter<GestureRecognizerResultsAdapter.ViewHolder>() {
+
     companion object {
         private const val NO_VALUE = "--"
     }
@@ -70,6 +56,17 @@ class GestureRecognizerResultsAdapter :
     }
 
     override fun getItemCount(): Int = adapterCategories.size
+
+    /**
+     * Get the current letter and confidence score at a specific position.
+     * For example, position 0 will give the top result.
+     */
+    fun getCurrentLetterAndScore(position: Int): Pair<String?, Float?> {
+        val category = adapterCategories.getOrNull(position)
+        val letter = category?.categoryName()
+        val score = category?.score()
+        return Pair(letter, score)
+    }
 
     inner class ViewHolder(private val binding: ItemGestureRecognizerResultBinding) :
         RecyclerView.ViewHolder(binding.root) {

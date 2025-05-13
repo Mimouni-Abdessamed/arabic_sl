@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!-- Couleur de fond plus claire pour meilleur contraste -->
+    <solid android:color="#424242"/>
+    <!-- Bordure verte avec effet de brillance -->
+    <stroke
+        android:width="2dp"
+        android:color="#4CAF50"
+        android:dashWidth="0dp"
+        android:dashGap="0dp"/>
+    <!-- Ombre interne pour effet 3D -->
+    <padding
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="2dp"/>
+    <!-- Effet de brillance (optionnel) -->
+    <gradient
+        android:type="sweep"
+        android:centerColor="#334CAF50"
+        android:endColor="#004CAF50"
+        android:startColor="#004CAF50"/>
+</shape>

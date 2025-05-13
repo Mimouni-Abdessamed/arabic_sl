@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <!-- Single centered letter display -->
+    <TextView
+        android:id="@+id/letterBox"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="@drawable/current_letter_bg"
+        android:elevation="4dp"
+        android:layout_gravity="center"/>
+
+</FrameLayout>
