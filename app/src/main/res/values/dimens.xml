@@ -30,4 +30,5 @@
 
     <integer name="bottom_sheet_control_text_min_ems">3</integer>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dialog_horizontal_padding">16dp</dimen>
 </resources>

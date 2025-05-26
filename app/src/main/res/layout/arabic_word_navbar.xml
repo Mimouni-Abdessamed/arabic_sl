@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/arabicWordNavbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
+
+
+    <!-- RecyclerView for displaying word navigation -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wordRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" />
+
+
+    <!-- Skip Word Button -->
+    <Button
+        android:id="@+id/skipWordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="تخطي"
+        android:textSize="16sp"
+        android:minHeight="48dp"
+        android:minWidth="100dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/purple_text"
+        android:textColor="@color/purple" />
+    <!-- Feedback Text -->
+    <TextView
+        android:id="@+id/feedbackText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="18sp"
+        android:padding="4dp" />
+</LinearLayout>

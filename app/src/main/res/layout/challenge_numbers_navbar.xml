@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
+    <!-- RecyclerView for number progression -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/challengeRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Challenge Skip Button -->
+    <Button
+        android:id="@+id/btnSkipChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="تخطي"
+        android:textSize="16sp"
+        android:minHeight="48dp"
+        android:minWidth="100dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="0dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/purple_text"
+        android:textColor="@color/purple"/>
+
+</LinearLayout>

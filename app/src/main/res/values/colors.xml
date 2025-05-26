@@ -15,6 +15,24 @@
     ~ limitations under the License.
 -->
 <resources>
+    <color name="mp_color_background">#7851a9</color>
+
+    <color name="blue">#D4EDFE</color>
+    <color name="blue_header">#143658</color>
+    <color name="blue_text">#5C7997</color>
+
+    <color name="orange">#FFE7C4</color>
+    <color name="orange_header">#693A20</color>
+    <color name="orange_text">#83653C</color>
+
+    <color name="purple">#fceaff</color>
+    <color name="purple_header">#2C1C53</color>
+    <color name="purple_text">#a68dc0</color>
+    <color name="green">#00c9aa</color>
+
+    <color name="bottom_nav_background">#2C2C2C</color> <!-- matches previous style -->
+
+
     <color name="mp_color_primary">@android:color/white</color>
     <color name="mp_color_primary_variant">#12B5CB</color>
     <color name="mp_color_primary_dark">#00676D</color>
@@ -29,4 +47,9 @@
     <color name="icFocused">#DDFFFFFF</color>
     <color name="icPressed">#AAFFFFFF</color>
     <item name="background" type="color">#1C1C1C</item>
+
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryLight">#BB86FC</color>
+    <color name="red">#F44336</color>
 </resources>

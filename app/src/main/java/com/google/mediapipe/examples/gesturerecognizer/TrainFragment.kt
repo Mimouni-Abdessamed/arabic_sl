@@ -1,60 +1,136 @@
 package com.google.mediapipe.examples.gesturerecognizer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-//import com.google.mediapipe.examples.gesturerecognizer.R
+import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
+import com.google.mediapipe.examples.gesturerecognizer.fragment.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TrainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TrainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var isTrainingExpanded = false
+    private var isChallengesExpanded = false
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_train, container, false)
+        val view = inflater.inflate(R.layout.fragment_train, container, false)
+
+        // Training Section
+        val trainingExpandButton = view.findViewById<MaterialButton>(R.id.btn_training_expand)
+        val lettersButton = view.findViewById<MaterialButton>(R.id.lettersButton)
+        val numbersButton = view.findViewById<MaterialButton>(R.id.numbersButton)
+        val wordsButton = view.findViewById<MaterialButton>(R.id.wordsButton)
+
+        // Challenges Section
+        val challengesExpandButton = view.findViewById<MaterialButton>(R.id.btn_challenges_expand)
+        val lettersChallengeBtn = view.findViewById<MaterialButton>(R.id.letters_challenge_btn)
+        val numbersChallengeBtn = view.findViewById<MaterialButton>(R.id.numbers_challenge_btn)
+
+        // Quiz Section
+        val quizButton = view.findViewById<MaterialButton>(R.id.quizButton)
+
+        // Click Listeners
+        trainingExpandButton.setOnClickListener { toggleTrainingButtons(view) }
+        challengesExpandButton.setOnClickListener { toggleChallengesButtons(view) }
+
+        lettersButton.setOnClickListener { replaceFragment(LetterCameraFragment()) }
+        numbersButton.setOnClickListener { replaceFragment(NumberCameraFragment()) }
+        wordsButton.setOnClickListener { replaceFragment(WordCategoriesFragment()) }
+        lettersChallengeBtn.setOnClickListener { replaceFragment(LettersChallengeFragment()) }
+        numbersChallengeBtn.setOnClickListener { replaceFragment(NumbersChallengeFragment()) }
+        quizButton.setOnClickListener { replaceFragment(QuizFragment()) }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TrainFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TrainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val fadeIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in)
+        val cardTraining = view.findViewById<CardView>(R.id.card_training)
+        val cardChallenges = view.findViewById<CardView>(R.id.card_challenges)
+        val cardQuiz = view.findViewById<CardView>(R.id.card_quiz)
+
+        cardTraining.startAnimation(fadeIn)
+        cardChallenges.postDelayed({ cardChallenges.startAnimation(fadeIn) }, 150)
+        cardQuiz.postDelayed({ cardQuiz.startAnimation(fadeIn) }, 300)
+    }
+
+    private fun toggleTrainingButtons(view: View) {
+        val subButtons = view.findViewById<View>(R.id.sub_buttons_container)
+        val expandButton = view.findViewById<MaterialButton>(R.id.btn_training_expand)
+
+        if (isChallengesExpanded) toggleChallengesButtons(view)
+
+        if (isTrainingExpanded) {
+            collapseSection(subButtons, expandButton, R.drawable.ic_arrow_down)
+        } else {
+            expandSection(subButtons, expandButton, R.drawable.ic_arrow_up)
+        }
+        isTrainingExpanded = !isTrainingExpanded
+    }
+
+    private fun toggleChallengesButtons(view: View) {
+        val subButtons = view.findViewById<View>(R.id.challenges_sub_container)
+        val expandButton = view.findViewById<MaterialButton>(R.id.btn_challenges_expand)
+
+        if (isTrainingExpanded) toggleTrainingButtons(view)
+
+        if (isChallengesExpanded) {
+            collapseSection(subButtons, expandButton, R.drawable.ic_arrow_down)
+        } else {
+            expandSection(subButtons, expandButton, R.drawable.ic_arrow_up)
+        }
+        isChallengesExpanded = !isChallengesExpanded
+    }
+
+    private fun expandSection(
+        subButtons: View,
+        expandButton: MaterialButton,
+        iconRes: Int
+    ) {
+        subButtons.visibility = View.VISIBLE
+        subButtons.alpha = 0f
+        subButtons.translationY = -20f
+        subButtons.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(300)
+            .setInterpolator(DecelerateInterpolator())
+        expandButton.icon = resources.getDrawable(iconRes, null)
+    }
+
+    private fun collapseSection(
+        subButtons: View,
+        expandButton: MaterialButton,
+        iconRes: Int
+    ) {
+        subButtons.animate()
+            .alpha(0f)
+            .translationY(-20f)
+            .setDuration(300)
+            .withEndAction { subButtons.visibility = View.GONE }
+        expandButton.icon = resources.getDrawable(iconRes, null)
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                android.R.anim.fade_in,
+                android.R.anim.fade_out,
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
+            )
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

@@ -1,84 +1,113 @@
-/*
- * Copyright 2022 The TensorFlow Authors. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *             http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.google.mediapipe.examples.gesturerecognizer
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.mediapipe.examples.gesturerecognizer.DictionaryFragment
 import com.google.mediapipe.examples.gesturerecognizer.HomeFragment
-import com.google.mediapipe.examples.gesturerecognizer.TrainFragment
-import com.google.mediapipe.examples.gesturerecognizer.TranslatFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Locale
 
-/*class MainActivity : AppCompatActivity() {
-    private lateinit var activityMainBinding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(activityMainBinding.root)
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-        val navController = navHostFragment.navController
-        activityMainBinding.navigation.setupWithNavController(navController)
-        activityMainBinding.navigation.setOnNavigationItemReselectedListener {
-            // ignore the reselection
-        }
-    }
-
-    override fun onBackPressed() {
-        finish()
-    }
-}*/
 class MainActivity : AppCompatActivity() {
+    lateinit var bottomNavigationView: BottomNavigationView
+    private val prefsName = "app_prefs"
+    private val firstLaunchKey = "first_launch"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val locale = Locale("ar")
-        Locale.setDefault(locale)
+        // Set Arabic locale
+        Locale.setDefault(Locale("ar"))
         val config = Configuration()
-        config.setLocale(locale)
+        config.setLocale(Locale("ar"))
         resources.updateConfiguration(config, resources.displayMetrics)
+
         setContentView(R.layout.activity_main)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        // First launch check
+        val sharedPrefs = getSharedPreferences(prefsName, Context.MODE_PRIVATE)
+        if (sharedPrefs.getBoolean(firstLaunchKey, true)) {
+            showWelcomeDialog()
+            sharedPrefs.edit().putBoolean(firstLaunchKey, false).apply()
+        }
 
-        loadFragment(HomeFragment())    // أول شاشة
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        bottomNav.setOnItemSelectedListener { item ->
+        // Initial fragment load
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment())
+                .commit()
+        }
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> loadFragment(HomeFragment())
-                R.id.nav_dictionary -> loadFragment(DictionaryFragment())
-                R.id.nav_translate -> loadFragment(TranslatFragment())
-                R.id.nav_train -> loadFragment(TrainFragment())
+                R.id.nav_home -> switchFragment(HomeFragment())
+                R.id.nav_translate -> switchFragment(TranslatFragment())
+                R.id.nav_train -> switchFragment(TrainFragment())
+                R.id.nav_dictionary -> switchFragment(DictionaryFragment())
             }
             true
         }
     }
 
-    private fun loadFragment(fragment: Fragment): Boolean {
+    private fun showWelcomeDialog() {
+        val dialog = WelcomeDialogFragment()
+        dialog.show(supportFragmentManager, "WelcomeDialog")
+    }
+
+    private fun switchFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
             .replace(R.id.fragment_container, fragment)
             .commit()
-        return true
+
+        updateBottomNavVisibility(fragment)
+    }
+
+    private fun updateBottomNavVisibility(fragment: Fragment) {
+        if (fragment is HomeFragment) {
+            hideBottomNavWithAnimation()
+        } else {
+            showBottomNavWithAnimation()
+        }
+    }
+
+    internal fun showBottomNavWithAnimation() {
+        if (bottomNavigationView.visibility != View.VISIBLE) {
+            bottomNavigationView.startAnimation(
+                AnimationUtils.loadAnimation(this, R.anim.bottom_nav_show)
+            )
+            bottomNavigationView.visibility = View.VISIBLE
+        }
+    }
+
+    internal fun hideBottomNavWithAnimation() {
+        if (bottomNavigationView.visibility == View.VISIBLE) {
+            bottomNavigationView.startAnimation(
+                AnimationUtils.loadAnimation(this, R.anim.bottom_nav_hide)
+            )
+            bottomNavigationView.visibility = View.GONE
+        }
+    }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+
+        if (currentFragment !is HomeFragment) {
+            switchFragment(HomeFragment())
+            bottomNavigationView.selectedItemId = R.id.nav_home
+        } else {
+            super.onBackPressed()
+        }
     }
 }
-

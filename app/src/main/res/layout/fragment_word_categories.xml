@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mp_color_background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/colors_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="الوان"
+            android:textSize="24sp"
+            android:minHeight="100dp"
+            android:backgroundTint="@color/purple_text"
+            android:textColor="@color/purple"
+            android:fontFamily="@font/rubik_regular"
+            android:textStyle="bold"
+            android:padding="24dp"
+            android:layout_marginVertical="16dp"
+            app:cornerRadius="15dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/verbs_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="افعال"
+            android:textSize="24sp"
+            android:minHeight="100dp"
+            android:backgroundTint="@color/purple_text"
+            android:textColor="@color/purple"
+            android:fontFamily="@font/rubik_regular"
+            android:textStyle="bold"
+            android:padding="24dp"
+            android:layout_marginVertical="16dp"
+            app:cornerRadius="15dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/education_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تعليم"
+            android:textSize="24sp"
+            android:minHeight="100dp"
+            android:backgroundTint="@color/purple_text"
+            android:textColor="@color/purple"
+            android:fontFamily="@font/rubik_regular"
+            android:textStyle="bold"
+            android:padding="24dp"
+            android:layout_marginVertical="16dp"
+            app:cornerRadius="15dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/health_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="الصحة"
+            android:textSize="24sp"
+            android:minHeight="100dp"
+            android:backgroundTint="@color/purple_text"
+            android:textColor="@color/purple"
+            android:fontFamily="@font/rubik_regular"
+            android:textStyle="bold"
+            android:padding="24dp"
+            android:layout_marginVertical="16dp"
+            app:cornerRadius="15dp" />
+
+    </LinearLayout>
+</ScrollView>

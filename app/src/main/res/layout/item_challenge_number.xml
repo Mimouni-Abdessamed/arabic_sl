@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@color/purple_header">
+
+    <TextView
+        android:id="@+id/numberBox"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="@drawable/current_number_bg"
+        android:elevation="4dp"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

@@ -1,57 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ~ Copyright 2022 The TensorFlow Authors. All Rights Reserved.
-    ~
-    ~ Licensed under the Apache License, Version 2.0 (the "License");
-    ~ you may not use this file except in compliance with the License.
-    ~ You may obtain a copy of the License at
-    ~
-    ~       http://www.apache.org/licenses/LICENSE-2.0
-    ~
-    ~ Unless required by applicable law or agreed to in writing, software
-    ~ distributed under the License is distributed on an "AS IS" BASIS,
-    ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    ~ See the License for the specific language governing permissions and
-    ~ limitations under the License.
--->
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/camera_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
+<!--
+        ~ Copyright 2022 The TensorFlow Authors. All Rights Reserved.
+        ~
+        ~ Licensed under the Apache License, Version 2.0 (the "License");
+        ~ you may not use this file except in compliance with the License.
+        ~ You may obtain a copy of the License at
+        ~
+        ~       http://www.apache.org/licenses/LICENSE-2.0
+        ~
+        ~ Unless required by applicable law or agreed to in writing, software
+        ~ distributed under the License is distributed on an "AS IS" BASIS,
+        ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        ~ See the License for the specific language governing permissions and
+        ~ limitations under the License.
+    -->
+<!--
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/camera_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/view_finder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:scaleType="fillStart" />
+
+        <com.google.mediapipe.examples.gesturerecognizer.OverlayView
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/bottom_sheet_layout"
+            layout="@layout/info_bottom_sheet" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
+            android:background="@color/bottom_sheet_background"
+            android:clipToPadding="true"
+            android:padding="@dimen/bottom_sheet_padding"
+            app:layout_anchor="@id/bottom_sheet_layout"
+            app:layout_anchorGravity="top"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/mp_color_primary"
+            app:layout_anchor="@id/recyclerview_results"
+            app:layout_anchorGravity="bottom" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+-->
+
+<!-- Layout principal utilisant CoordinatorLayout pour une gestion flexible des vues -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl">
+
+    <!-- Vue caméra -->
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:scaleType="fillStart" />
+        android:layoutDirection="ltr"
+        app:scaleType="fillStart"/>
 
+    <!-- Overlay de détection -->
+
+    <!-- Barre supérieure - Contrôles -->
     <com.google.mediapipe.examples.gesturerecognizer.OverlayView
         android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_anchor="@+id/view_finder"
+        app:layout_anchorGravity="center" />
 
-    <include
-        android:id="@+id/bottom_sheet_layout"
-        layout="@layout/info_bottom_sheet" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_results"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
-        android:background="@color/bottom_sheet_background"
-        android:clipToPadding="true"
-        android:padding="@dimen/bottom_sheet_padding"
-        app:layout_anchor="@id/bottom_sheet_layout"
-        app:layout_anchorGravity="top"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        android:background="#80000000"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
-    <View
+        <!-- Geste actuel avec indicateur de progression -->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/btn_gallery"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription=""
+                android:src="@drawable/ic_baseline_photo_library_24"
+                app:tint="@android:color/white"/>
+            <TextView
+                android:id="@+id/current_gesture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#4CAF50"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/gesture_progress"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"
+                app:indicatorColor="#4CAF50"
+                app:trackColor="#FFFFFF"
+                app:trackThickness="3dp"/>
+        </RelativeLayout>
+
+        <!-- Boutons d'action -->
+        <ImageButton
+            android:id="@+id/btn_toggle_capture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription=""
+            android:src="@drawable/ic_pause"
+            app:tint="@android:color/white"/>
+
+        <ImageButton
+            android:id="@+id/btn_switch_camera"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/switch_camera"
+            android:src="@drawable/ic_switch_camera"
+            app:tint="@android:color/white"/>
+    </LinearLayout>
+
+    <!-- Zone de texte concaténé avec bouton d'espace -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#212121"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/concatenated_letters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="8sp"/>
+
+        <!-- Bouton pour ajouter un espace -->
+        <Button
+            android:id="@+id/btn_add_space"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/space_btn"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:textAllCaps="false"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <!-- Bouton effacer -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_clear"
         android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@color/mp_color_primary"
-        app:layout_anchor="@id/recyclerview_results"
-        app:layout_anchorGravity="bottom" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription=""
+        android:src="@drawable/ic_clear"
+        app:backgroundTint="#F44336"
+        app:tint="#FFFFFF"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

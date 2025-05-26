@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="4dp"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:background="@color/purple_header">
+
+    <!-- Image layer -->
+
+    <ImageView
+        android:id="@+id/letterImage"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="end|top"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/letterBox"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:background="@drawable/letter_box_bg"
+        android:gravity="start|top"
+        android:elevation="3dp" />
+</FrameLayout>

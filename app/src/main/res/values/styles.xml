@@ -15,11 +15,34 @@
     ~ limitations under the License.
 -->
 <resources>
+
     <style name="BottomSheetSpinnerItemStyle" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
         <item name="android:textSize">@dimen/bottom_sheet_text_size</item>
     </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="CustomAlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+        <item name="android:windowIsFloating">true</item>
+
+        <!-- Add these two for minimum dialog width -->
+        <item name="android:windowMinWidthMajor">90%</item>  <!-- width in portrait -->
+        <item name="android:windowMinWidthMinor">90%</item>  <!-- width in landscape -->
+    </style>
+
 
     <style name="AppThemeProgressStyle">
         <item name="colorAccent">@color/mp_color_primary_variant</item>
+
     </style>
+
+
+
 </resources>

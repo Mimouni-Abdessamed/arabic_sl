@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1045867250590",
+    "project_id": "eng-spot-453111-r5",
+    "storage_bucket": "eng-spot-453111-r5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045867250590:android:e004a4310b587b33450c8f",
+        "android_client_info": {
+          "package_name": "com.example.loumma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdaURZ2SvHt18HUNsaUuMsmjG_amITrkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045867250590:android:d51fee6bca6f9fe8450c8f",
+        "android_client_info": {
+          "package_name": "com.google.mediapipe.examples.gesturerecognizer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdaURZ2SvHt18HUNsaUuMsmjG_amITrkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

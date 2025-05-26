@@ -1,9 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DictionaryFragment">
+    android:padding="16dp"
+    android:background="#1c1c1c">
 
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_background"
+            android:backgroundTint="#3a3a3a"
+            android:hint="اكتب كلمة"
+            android:inputType="text"
+            android:textColor="#ffffff"
+            android:textColorHint="#a0a0a0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="بحث"
+            android:textColor="#ffffff"
+            app:backgroundTint="#3a3a3a"
+            app:strokeColor="#4a4a4a"
+            app:strokeWidth="1dp"
+            app:cornerRadius="8dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/signPhraseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="اشارة مرحبا"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/videoCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/videoCard"
+        android:layout_width="640dp"
+        android:layout_height="360dp"
+        android:layout_marginTop="48dp"
+        android:radius="12dp"
+        app:cardBackgroundColor="#2a2a2a"
+        app:cardElevation="6dp"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signPhraseTextView">
+
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2a2a2a"
+            android:visibility="gone"
+            app:resize_mode="fill"
+            app:surface_type="texture_view"
+            app:use_controller="false" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

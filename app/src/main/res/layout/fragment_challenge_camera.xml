@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/challenge_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/view_finder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        app:scaleType="fillStart" />
+
+    <!-- Overlay for hand drawing -->
+    <com.google.mediapipe.examples.gesturerecognizer.OverlayView
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scaleType="fillStart" />
+
+    <!-- Navbar Container (Will hold either letters/numbers navbar) -->
+    <FrameLayout
+        android:id="@+id/challengesNavbarViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layoutDirection="ltr"
+
+        android:background="@android:color/transparent"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Recognized results at the bottom -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
+        android:background="@color/bottom_sheet_background"
+        android:clipToPadding="true"
+        android:padding="@dimen/bottom_sheet_padding"
+        android:visibility="gone"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <!-- Divider above the RecyclerView -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:background="@color/mp_color_primary" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

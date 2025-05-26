@@ -1,9 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/challenges_type_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainFragment">
+    android:background="@color/mp_color_background"
+    android:padding="16dp"
+    >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-</FrameLayout>
+        <!-- Training Section -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_training"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/purple_text">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_training_expand"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="التدريبات"
+                    android:textSize="18sp"
+                    android:textColor="@color/purple"
+                    app:icon="@drawable/ic_arrow_down"
+                    app:iconTint="@color/purple"
+                    app:iconGravity="end"
+                    app:strokeColor="@color/mp_color_primary"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:fontFamily="@font/rubik_regular"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/sub_buttons_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/lettersButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:text="الحروف"
+                        android:textSize="16sp"
+                        android:textColor="@color/purple"
+                        app:icon="@drawable/ic_letters"
+                        app:iconTint="@color/purple"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:fontFamily="@font/rubik_regular"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/numbersButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:text="الأرقام"
+                        android:textSize="16sp"
+                        android:textColor="@color/purple"
+                        app:icon="@drawable/ic_numbers"
+                        app:iconTint="@color/purple"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:fontFamily="@font/rubik_regular"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/wordsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:text="الكلمات"
+                        android:textSize="16sp"
+                        android:textColor="@color/purple"
+                        app:icon="@drawable/ic_words"
+                        app:iconTint="@color/purple"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:fontFamily="@font/rubik_regular"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Challenges Section -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_challenges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/purple_text">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_challenges_expand"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="التحديات"
+                    android:textSize="18sp"
+                    android:textColor="@color/purple"
+                    app:icon="@drawable/ic_arrow_down"
+                    app:iconTint="@color/purple"
+                    app:iconGravity="end"
+                    app:strokeColor="@color/purple"
+                    app:strokeWidth="1dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:fontFamily="@font/rubik_regular"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/challenges_sub_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/letters_challenge_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:text="تحدي الحروف"
+                        android:textSize="16sp"
+                        android:textColor="@color/purple"
+                        app:icon="@drawable/ic_letters"
+                        app:iconTint="@color/purple"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:fontFamily="@font/rubik_regular"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/numbers_challenge_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:text="تحدي الأرقام"
+                        android:textSize="16sp"
+                        android:textColor="@color/purple"
+                        app:icon="@drawable/ic_numbers"
+                        app:iconTint="@color/purple"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:fontFamily="@font/rubik_regular"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Quiz Section -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/purple_text"
+            android:fontFamily="@font/rubik_regular"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/quizButton"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="الإختبارات"
+                android:textSize="18sp"
+                android:textColor="@color/purple"
+
+                app:iconTint="@color/purple"
+                app:strokeColor="@color/purple"
+                app:strokeWidth="1dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:fontFamily="@font/rubik_regular"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

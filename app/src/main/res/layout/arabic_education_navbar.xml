@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/arabicEducationNavbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
+    <!-- Feedback Text -->
+
+    <!-- RecyclerView for displaying education items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/educationRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:overScrollMode="never" />
+
+    <!-- Skip Button -->
+    <Button
+        android:id="@+id/skipEducationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="تخطي"
+        android:textSize="16sp"
+        android:minHeight="48dp"
+        android:minWidth="100dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="0dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/purple_text"
+        android:textColor="@color/purple" />
+    <TextView
+        android:id="@+id/feedbackText"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="14sp" />
+
+
+</LinearLayout>
